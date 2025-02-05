@@ -13,42 +13,40 @@
             background: linear-gradient(to right, #ff758c, #ff7eb3);
             text-align: center;
             color: white;
-            overflow: hidden;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
         .container {
-            margin: 50px auto;
             max-width: 600px;
-            animation: fadeIn 2s ease-in-out;
+            margin: 50px auto;
         }
-        .slideshow-container {
-            position: relative;
-            max-width: 100%;
+        .image-container {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            margin-bottom: 30px;
         }
-        .slide {
-            display: none;
-            animation: fade 1.5s ease-in-out;
+        .image-container.show {
+            opacity: 1;
+            transform: translateY(0);
         }
         img {
             width: 100%;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
         }
-        @keyframes fade {
-            from {opacity: 0.4}
-            to {opacity: 1}
+        p {
+            font-size: 18px;
+            font-weight: 400;
+            margin-top: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
-        @keyframes fadeIn {
-            from {opacity: 0}
-            to {opacity: 1}
-        }
-        @keyframes backgroundMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        body {
-            background-size: 200% 200%;
-            animation: backgroundMove 10s infinite alternate ease-in-out;
+        .text.show {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -59,53 +57,57 @@
     
     <div class="container">
         <h1>Gülüm, Seni Çok Seviyorum</h1>
-        <p id="changingText">Beni sana çeken şey neydi bilmiyorum… Ama bu fotoğrafı ilk gördüğüm an, bir şeylerin değişeceğini hissetmiştim.</p>
         
-        <div class="slideshow-container">
-            <div class="slide fade">
-                <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/ilk-gordugum.jpg" alt="İlk Gördüğüm Fotoğraf">
-            </div>
-            <div class="slide fade">
-                <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/bebeklik-yeni.jpg" alt="Bebeklik ve Yeni Hali">
-            </div>
-            <div class="slide fade">
-                <img id="selfieImage" src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/selfie.jpg" alt="Beraber Selfie">
-            </div>
-            <div class="slide fade">
-                <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/uyurken.jpg" alt="Uyurken">
-            </div>
-            <div class="slide fade">
-                <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/kardesiyle.jpg" alt="Defne ve Kardeşi">
-            </div>
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/ilk-gordugum.jpg" alt="İlk Gördüğüm Fotoğraf">
+            <p class="text">Beni sana çeken şey neydi bilmiyorum… Ama bu fotoğrafı ilk gördüğüm an, bir şeylerin değişeceğini hissetmiştim.</p>
         </div>
         
-        <p>Yaptığım bütün hatalar için üzgünüm, sevdiğim... Seni çok seviyorum.</p>
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/bebeklik-yeni.jpg" alt="Bebeklik ve Yeni Hali">
+            <p class="text">💖 Zaman değişse de senin güzelliğin hep aynı kaldı… Bebekken de, şimdi de gülüşün dünyamı aydınlatıyor.</p>
+        </div>
+        
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/selfie.jpg" alt="Beraber Selfie">
+            <p class="text">💙 Her anımız bir hikâye… Bu fotoğraf sadece bir kare değil, bizim en güzel anılarımızdan biri. Seninle her şey daha güzel, gülüm.</p>
+        </div>
+        
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/uyurken.jpg" alt="Uyurken">
+            <p class="text">Gözlerin, anlatamadığım cümlelerin en güzel özetiydi...</p>
+        </div>
+        
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/kardesiyle.jpg" alt="Defne ve Kardeşi">
+            <p class="text">✨ Bazen hayatta en saf sevgiyi küçük bir elin dokunuşunda hissedersin… Gülüm, sen sadece benim değil, herkesin kalbine dokunan bir mucizesin.</p>
+        </div>
     </div>
     
     <script>
-        let slideIndex = 0;
-        function showSlides() {
-            let slides = document.getElementsByClassName("slide");
-            let changingText = document.getElementById("changingText");
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
+        document.addEventListener("DOMContentLoaded", function() {
+            let images = document.querySelectorAll(".image-container");
+            let texts = document.querySelectorAll(".text");
+            
+            function revealOnScroll() {
+                let scrollPosition = window.innerHeight * 0.8;
+                
+                images.forEach((img) => {
+                    if (img.getBoundingClientRect().top < scrollPosition) {
+                        img.classList.add("show");
+                    }
+                });
+                
+                texts.forEach((txt) => {
+                    if (txt.getBoundingClientRect().top < scrollPosition) {
+                        txt.classList.add("show");
+                    }
+                });
             }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}
-            slides[slideIndex - 1].style.display = "block";
             
-            let texts = [
-                "Beni sana çeken şey neydi bilmiyorum… Ama bu fotoğrafı ilk gördüğüm an, bir şeylerin değişeceğini hissetmiştim.",
-                "💖 Zaman değişse de senin güzelliğin hep aynı kaldı… Bebekken de, şimdi de gülüşün dünyamı aydınlatıyor.",
-                "💙 Her anımız bir hikâye… Bu fotoğraf sadece bir kare değil, bizim en güzel anılarımızdan biri. Seninle her şey daha güzel, gülüm.",
-                "Beni sana çeken şey neydi bilmiyorum… Ama bu fotoğrafı ilk gördüğüm an, bir şeylerin değişeceğini hissetmiştim.",
-                "✨ Bazen hayatta en saf sevgiyi küçük bir elin dokunuşunda hissedersin… Gülüm, sen sadece benim değil, herkesin kalbine dokunan bir mucizesin."
-            ];
-            
-            changingText.innerText = texts[slideIndex - 1];
-            setTimeout(showSlides, 3000);
-        }
-        showSlides();
+            window.addEventListener("scroll", revealOnScroll);
+            revealOnScroll();
+        });
     </script>
 </body>
 </html>
