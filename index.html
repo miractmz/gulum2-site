@@ -6,10 +6,10 @@
     <title>Gülüm İçin</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
         
         body {
-            font-family: 'Great Vibes', cursive;
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(to right, #ff758c, #ff7eb3);
             text-align: center;
             color: white;
@@ -63,19 +63,19 @@
         
         <div class="slideshow-container">
             <div class="slide fade">
-                <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/ilk-gordugum.jpg" alt="İlk Gördüğüm Fotoğraf">
+                <img src="https://raw.githubusercontent.com/miractmz/gulumm-site/main/images/ilk-gordugum.jpg" alt="İlk Gördüğüm Fotoğraf">
             </div>
             <div class="slide fade">
-                <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/bebeklik-yeni.jpg" alt="Bebeklik ve Yeni Hali">
+                <img src="https://raw.githubusercontent.com/miractmz/gulumm-site/main/images/bebeklik-yeni.jpg" alt="Bebeklik ve Yeni Hali">
             </div>
             <div class="slide fade">
-                <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/selfie.jpg" alt="Beraber Selfie">
+                <img id="selfieImage" src="https://raw.githubusercontent.com/miractmz/gulumm-site/main/images/selfie.jpg" alt="Beraber Selfie">
             </div>
             <div class="slide fade">
-                <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/uyurken.jpg" alt="Uyurken">
+                <img src="https://raw.githubusercontent.com/miractmz/gulumm-site/main/images/uyurken.jpg" alt="Uyurken">
             </div>
             <div class="slide fade">
-                <img src="https://raw.githubusercontent.com/miractmz/gulum2-site/main/images/kardesiyle.jpg" alt="Defne ve Kardeşi">
+                <img src="https://raw.githubusercontent.com/miractmz/gulumm-site/main/images/kardesiyle.jpg" alt="Defne ve Kardeşi">
             </div>
         </div>
         
@@ -86,32 +86,26 @@
         let slideIndex = 0;
         function showSlides() {
             let slides = document.getElementsByClassName("slide");
+            let changingText = document.getElementById("changingText");
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
             slideIndex++;
             if (slideIndex > slides.length) {slideIndex = 1}
             slides[slideIndex - 1].style.display = "block";
+            
+            let texts = [
+                "Beni sana çeken şey neydi bilmiyorum… Ama bu fotoğrafı ilk gördüğüm an, bir şeylerin değişeceğini hissetmiştim.",
+                "💖 Zaman değişse de senin güzelliğin hep aynı kaldı… Bebekken de, şimdi de gülüşün dünyamı aydınlatıyor.",
+                "💙 Her anımız bir hikâye… Bu fotoğraf sadece bir kare değil, bizim en güzel anılarımızdan biri. Seninle her şey daha güzel, gülüm.",
+                "Beni sana çeken şey neydi bilmiyorum… Ama bu fotoğrafı ilk gördüğüm an, bir şeylerin değişeceğini hissetmiştim.",
+                "✨ Bazen hayatta en saf sevgiyi küçük bir elin dokunuşunda hissedersin… Gülüm, sen sadece benim değil, herkesin kalbine dokunan bir mucizesin."
+            ];
+            
+            changingText.innerText = texts[slideIndex - 1];
             setTimeout(showSlides, 3000);
         }
         showSlides();
-
-        let texts = [
-            "Beni sana çeken şey neydi bilmiyorum… Ama bu fotoğrafı ilk gördüğüm an, bir şeylerin değişeceğini hissetmiştim.",
-            "Her anımda aklımdasın, seninle her şey daha güzel...",
-            "Senin gülüşün dünyamı aydınlatıyor...",
-            "Sensiz bir dünya hayal bile edemiyorum...",
-            "Her şeyin en güzeli seninle anlam kazanıyor..."
-        ];
-        let textIndex = 0;
-
-        function changeText() {
-            document.getElementById("changingText").innerText = texts[textIndex];
-            textIndex = (textIndex + 1) % texts.length;
-            setTimeout(changeText, 4000);
-        }
-
-        window.onload = changeText;
     </script>
 </body>
 </html>
