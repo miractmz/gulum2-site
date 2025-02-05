@@ -59,7 +59,7 @@
     
     <div class="container">
         <h1>Gülüm, Seni Çok Seviyorum</h1>
-        <p>Beni sana çeken şey neydi bilmiyorum… Ama bu fotoğrafı ilk gördüğüm an, bir şeylerin değişeceğini hissetmiştim.</p>
+        <p id="changingText">Beni sana çeken şey neydi bilmiyorum… Ama bu fotoğrafı ilk gördüğüm an, bir şeylerin değişeceğini hissetmiştim.</p>
         
         <div class="slideshow-container">
             <div class="slide fade">
@@ -95,6 +95,23 @@
             setTimeout(showSlides, 3000);
         }
         showSlides();
+
+        let texts = [
+            "Beni sana çeken şey neydi bilmiyorum… Ama bu fotoğrafı ilk gördüğüm an, bir şeylerin değişeceğini hissetmiştim.",
+            "Her anımda aklımdasın, seninle her şey daha güzel...",
+            "Senin gülüşün dünyamı aydınlatıyor...",
+            "Sensiz bir dünya hayal bile edemiyorum...",
+            "Her şeyin en güzeli seninle anlam kazanıyor..."
+        ];
+        let textIndex = 0;
+
+        function changeText() {
+            document.getElementById("changingText").innerText = texts[textIndex];
+            textIndex = (textIndex + 1) % texts.length;
+            setTimeout(changeText, 4000);
+        }
+
+        window.onload = changeText;
     </script>
 </body>
 </html>
